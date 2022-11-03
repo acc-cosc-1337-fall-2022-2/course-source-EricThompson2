@@ -38,6 +38,8 @@ int main()
 		} while(game.game_over() == false);
 		game.display_board();
 
+		cout << "The winner is " << game.get_winner();
+
 		cout << "\n" << "Do you want to play again (1 for yes 0 for no): ";
 		cin >> loop_again;
 

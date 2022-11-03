@@ -59,10 +59,101 @@ string tic_tac_toe::get_player() const {
 
 void tic_tac_toe::start_game(string first_player) {
     player = first_player;
+    winner = " ";
     clear_board();
 }
 
 bool tic_tac_toe::game_over() {
+    bool output;
 
-    return check_board_full();
+
+    if (check_column_win() || check_row_win() || check_diagonal_win()) {
+
+        set_winner();
+        output = 1;
+    } else if (check_board_full()) {
+        output = 1;
+        winner = "C";    
+    } else {
+        output = 0;
+    }
+    
+    return output;
+}
+
+void tic_tac_toe::set_winner() {
+    if (player == "X"){
+        winner = "O";
+    } else if (player == "O") {
+    winner = "X";
+    }
+}
+
+bool tic_tac_toe::check_column_win() {
+    bool win = 0; 
+    string previous_player;
+
+    if (player == "X"){
+        previous_player = "O";
+    } else if (player == "O") {
+        previous_player = "X";
+    }
+
+    for (int coulmn = 0; coulmn < 3 && win == 0; coulmn++) {
+        win = 1;
+        for (int row = 0; row < 3; row++) {
+
+            if (pegs.at(coulmn + (row * 3 )) != previous_player){
+                win = 0;
+            }
+        }
+    }
+    return win;
+}
+
+bool tic_tac_toe::check_row_win() {
+    bool win = 0;
+    string previous_player;
+
+    if (player == "X"){
+        previous_player = "O";
+    } else if (player == "O") {
+        previous_player = "X";
+    }
+
+    for (int row = 0; row < 3 && win == 0; row++) {
+        win = 1;
+        for (int coulmn = 0; coulmn < 3; coulmn++) {
+
+            if (pegs.at(coulmn + (row * 3 )) != previous_player ){
+                win = 0;
+            }
+        }
+    }
+    return win;
+}
+
+bool tic_tac_toe::check_diagonal_win() {
+    bool win = 0;
+    string previous_player;
+
+    if (player == "X"){
+        previous_player = "O";
+    } else if (player == "O") {
+        previous_player = "X";
+    }
+   
+    if (pegs.at(0) == previous_player && pegs.at(4) == previous_player && pegs.at(8) == previous_player) {
+        win = 1;
+    } else if (pegs.at(2) == previous_player && pegs.at(4) == previous_player && pegs.at(6) == previous_player) {
+        win = 1;
+    } else {
+        win = 0;
+    }
+
+    return win;
+}
+
+string tic_tac_toe::get_winner() {
+    return winner;
 }
