@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
 
 using std::string;
 using std::vector;
@@ -14,17 +13,6 @@ void tic_tac_toe::clear_board() {
     pegs = {" ", " ", " ",
             " ", " ", " ",
             " ", " ", " ",};
-}
-
-void tic_tac_toe::display_board() const {
-    string output = "";
-
-        output =("\033[4m" + pegs.at(0) + "|" + pegs.at(1) + "|" + pegs.at(2) + "\n" +
-                             pegs.at(3) + "|" + pegs.at(4) + "|" + pegs.at(5) + "\033[0m" + "\n" + 
-                             pegs.at(6) + "|" + pegs.at(7) + "|" + pegs.at(8) + "\n");
-
-    cout << output;
-
 }
 
 void tic_tac_toe::mark_board(int position) {
@@ -156,4 +144,28 @@ bool tic_tac_toe::check_diagonal_win() {
 
 string tic_tac_toe::get_winner() {
     return winner;
+}
+
+std::ostream& operator<<(std::ostream& out, const tic_tac_toe& game) {
+
+    string output = "";
+
+    output =("\033[4m" + game.pegs.at(0) + "|" + game.pegs.at(1) + "|" + game.pegs.at(2) + "\n" +
+                         game.pegs.at(3) + "|" + game.pegs.at(4) + "|" + game.pegs.at(5) + "\033[0m" + "\n" + 
+                         game.pegs.at(6) + "|" + game.pegs.at(7) + "|" + game.pegs.at(8) + "\n");
+
+    out << output;
+
+    return out;
+}
+
+std::istream& operator>>(std::istream& in, tic_tac_toe& game) {
+    int position;
+
+    cout << "Enter a number from 1 to 9: ";
+	cin >> position;
+
+	game.mark_board(position);
+
+    return in;
 }
