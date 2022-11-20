@@ -1,9 +1,10 @@
 //cpp
 #include "tic_tac_toe_manager.h"
 
-#include <string>
-
 using std::string;
+using std::unique_ptr;
+using std::move;
+
 
 void tic_tac_toe_manager::update_winner_count(string winner) {
 
@@ -16,11 +17,11 @@ void tic_tac_toe_manager::update_winner_count(string winner) {
     }
 }
 
-void tic_tac_toe_manager::save_game(tic_tac_toe b) {
-    string winner = b.get_winner();
-    games.push_back(b);
-
+void tic_tac_toe_manager::save_game(unique_ptr<tic_tac_toe>& game) {
+    string winner = game->get_winner();
     update_winner_count(winner);
+    games.push_back(move(game));
+
 }
 
 void tic_tac_toe_manager::get_winner_total(int& o, int& w, int& t) {
@@ -35,7 +36,7 @@ std::ostream& operator<<(std::ostream& out, const tic_tac_toe_manager& manager) 
     int count = 0;
 
     while (count < length){
-        out << manager.games.at(count);
+        out << *manager.games.at(count);
 
         count++;
     }

@@ -10,9 +10,9 @@ using std::cout;
 using std::cin;
 
 void tic_tac_toe::clear_board() {
-    pegs = {" ", " ", " ",
-            " ", " ", " ",
-            " ", " ", " ",};
+    for (auto i = 0; i < pegs.size(); i++) {
+    pegs.at(i) = " ";
+    } 
 }
 
 void tic_tac_toe::mark_board(int position) {
@@ -32,7 +32,7 @@ bool tic_tac_toe::check_board_full() {
     int couter = 0;
     bool output = 1;
 
-    while (couter < 9) {
+    while (couter < pegs.size()) {
         if (pegs.at(couter) == " ") {
             output = 0;
         }
@@ -78,7 +78,8 @@ void tic_tac_toe::set_winner() {
 }
 
 bool tic_tac_toe::check_column_win() {
-    bool win = 0; 
+    /*
+    ool win = 0; 
     string previous_player;
 
     if (player == "X"){
@@ -97,9 +98,12 @@ bool tic_tac_toe::check_column_win() {
         }
     }
     return win;
+    */
+    return false;
 }
 
 bool tic_tac_toe::check_row_win() {
+    /*
     bool win = 0;
     string previous_player;
 
@@ -119,9 +123,12 @@ bool tic_tac_toe::check_row_win() {
         }
     }
     return win;
+    */
+    return false;
 }
 
 bool tic_tac_toe::check_diagonal_win() {
+    /*
     bool win = 0;
     string previous_player;
 
@@ -140,6 +147,8 @@ bool tic_tac_toe::check_diagonal_win() {
     }
 
     return win;
+    */
+    return false;
 }
 
 string tic_tac_toe::get_winner() {
@@ -150,10 +159,16 @@ std::ostream& operator<<(std::ostream& out, const tic_tac_toe& game) {
 
     string output = "";
 
-    output =("\033[4m" + game.pegs.at(0) + "|" + game.pegs.at(1) + "|" + game.pegs.at(2) + "\n" +
-                         game.pegs.at(3) + "|" + game.pegs.at(4) + "|" + game.pegs.at(5) + "\033[0m" + "\n" + 
-                         game.pegs.at(6) + "|" + game.pegs.at(7) + "|" + game.pegs.at(8) + "\n");
-
+    if (game.pegs.size() == 9) {
+        output =("\033[4m" + game.pegs.at(0) + "|" + game.pegs.at(1) + "|" + game.pegs.at(2) + "\n" +
+                             game.pegs.at(3) + "|" + game.pegs.at(4) + "|" + game.pegs.at(5) + "\033[0m" + "\n" + 
+                             game.pegs.at(6) + "|" + game.pegs.at(7) + "|" + game.pegs.at(8) + "\n");
+    } else if (game.pegs.size() == 16) {
+        output =("\033[4m" + game.pegs.at(0) + "|" + game.pegs.at(1) + "|" + game.pegs.at(2) + "|"  + game.pegs.at(3) + "\n" +
+                             game.pegs.at(4) + "|" + game.pegs.at(5) + "|" + game.pegs.at(6) + "|"  + game.pegs.at(7) + "\n" +
+                             game.pegs.at(8) + "|" + game.pegs.at(9) + "|" + game.pegs.at(10) + "|"  + game.pegs.at(11) + "\033[0m" + "\n" + 
+                             game.pegs.at(12) + "|" + game.pegs.at(13) + "|" + game.pegs.at(14) + "|"  + game.pegs.at(15) + "\n");
+    }
     out << output;
 
     return out;
