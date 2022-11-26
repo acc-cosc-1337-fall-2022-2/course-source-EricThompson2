@@ -1,7 +1,9 @@
 #include "tic_tac_toe_3.h"
 #include <string>
+#include <vector>
 
 using std::string;
+using std::vector;
 /*
 class function check_column_win
 Win by column if and return true if
@@ -94,5 +96,3 @@ bool tic_tac_toe3::check_diagonal_win() {
 
     return win;
 }
-
-

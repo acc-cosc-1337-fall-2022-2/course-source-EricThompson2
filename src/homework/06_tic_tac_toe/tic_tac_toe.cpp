@@ -1,6 +1,6 @@
 //cpp
 #include "tic_tac_toe.h"
-
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -12,6 +12,7 @@ using std::cin;
 void tic_tac_toe::clear_board() {
     for (auto i = 0; i < pegs.size(); i++) {
     pegs.at(i) = " ";
+    
     } 
 }
 
@@ -78,81 +79,26 @@ void tic_tac_toe::set_winner() {
 }
 
 bool tic_tac_toe::check_column_win() {
-    /*
-    ool win = 0; 
-    string previous_player;
-
-    if (player == "X"){
-        previous_player = "O";
-    } else if (player == "O") {
-        previous_player = "X";
-    }
-
-    for (int coulmn = 0; coulmn < 3 && win == 0; coulmn++) {
-        win = 1;
-        for (int row = 0; row < 3; row++) {
-
-            if (pegs.at(coulmn + (row * 3 )) != previous_player){
-                win = 0;
-            }
-        }
-    }
-    return win;
-    */
+    
     return false;
 }
 
 bool tic_tac_toe::check_row_win() {
-    /*
-    bool win = 0;
-    string previous_player;
-
-    if (player == "X"){
-        previous_player = "O";
-    } else if (player == "O") {
-        previous_player = "X";
-    }
-
-    for (int row = 0; row < 3 && win == 0; row++) {
-        win = 1;
-        for (int coulmn = 0; coulmn < 3; coulmn++) {
-
-            if (pegs.at(coulmn + (row * 3 )) != previous_player ){
-                win = 0;
-            }
-        }
-    }
-    return win;
-    */
+    
     return false;
 }
 
 bool tic_tac_toe::check_diagonal_win() {
-    /*
-    bool win = 0;
-    string previous_player;
 
-    if (player == "X"){
-        previous_player = "O";
-    } else if (player == "O") {
-        previous_player = "X";
-    }
-   
-    if (pegs.at(0) == previous_player && pegs.at(4) == previous_player && pegs.at(8) == previous_player) {
-        win = 1;
-    } else if (pegs.at(2) == previous_player && pegs.at(4) == previous_player && pegs.at(6) == previous_player) {
-        win = 1;
-    } else {
-        win = 0;
-    }
-
-    return win;
-    */
     return false;
 }
 
 string tic_tac_toe::get_winner() {
     return winner;
+}
+
+vector<string> tic_tac_toe::get_pegs() const {
+    return pegs;
 }
 
 std::ostream& operator<<(std::ostream& out, const tic_tac_toe& game) {
@@ -184,3 +130,7 @@ std::istream& operator>>(std::istream& in, tic_tac_toe& game) {
 
     return in;
 }
+/*
+tic_tac_toe::tic_tac_toe (int board_size, std::vector<std::string> p, std::string win):pegs(board_size*board_size, " ") {
+    winner = win;
+}*/

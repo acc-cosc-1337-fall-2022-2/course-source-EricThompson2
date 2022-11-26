@@ -42,3 +42,11 @@ std::ostream& operator<<(std::ostream& out, const tic_tac_toe_manager& manager) 
     }
     return out;
 }
+
+tic_tac_toe_manager::tic_tac_toe_manager(tic_tac_toe_data& d):data(d) {
+    games = move(data.get_games());    
+}
+
+tic_tac_toe_manager::~tic_tac_toe_manager() {
+    data.save_games(games);
+}

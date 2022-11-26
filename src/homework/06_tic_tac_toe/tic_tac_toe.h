@@ -12,12 +12,15 @@ class tic_tac_toe {
     friend std::ostream& operator<<(std::ostream& out, const tic_tac_toe& game);
     friend std::istream& operator>>(std::istream& in, tic_tac_toe& game);
     public:
-        tic_tac_toe(int board_size):pegs(board_size*board_size, " "){};
+        tic_tac_toe (int board_size, std::vector<std::string> b, std::string win):pegs(b) {
+        winner = win;
+        }
         bool game_over();
         void start_game(std::string first_player);
         void mark_board(int position);
         std::string get_player() const;
         std::string get_winner();
+        std::vector<std::string> get_pegs() const;
 
     protected:
         std::vector<std::string> pegs;

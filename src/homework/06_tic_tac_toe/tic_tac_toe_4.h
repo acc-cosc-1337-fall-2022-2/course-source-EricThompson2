@@ -7,7 +7,7 @@
 class tic_tac_toe4: public tic_tac_toe {
     
     public:
-        tic_tac_toe4() : tic_tac_toe(4){}
+        tic_tac_toe4(std::vector<std::string> p, std::string winner) : tic_tac_toe(4, p, winner){}
 
     private:
         bool check_column_win();
